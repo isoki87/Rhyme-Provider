@@ -14,7 +14,7 @@ public class RhymeProvider {
 
 
     //Constructor, constructs the phonic bank from .txt
-    RhymeProvider(String file_path){
+    RhymeProvider(String file_path) throws IOException{
         PhonicDictionary pd = new PhonicDictionary(file_path);
         pd.initialize();
         this.phonDict = pd;

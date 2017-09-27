@@ -1,51 +1,31 @@
 package com.leo;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  * Created by Lelily on 9/22/2017.
  */
 public class FileProcessor {
-    public HashSet<String> pullVowels(String file_path){
-        HashSet<String> hashset = new HashSet<>();
-        try{
-            FileReader fr = new FileReader(file_path);
-            BufferedReader reader = new BufferedReader(fr);
-            String line;
-            while((line = reader.readLine()) != null){
-                hashset.add(line);
-            }
-            reader.close();
-        } catch (FileNotFoundException e){
-            System.out.println("File not found.");
-        } catch (IOException e){
-            System.out.println("error");
-        }
-        return hashset;
+    private FileReader fr;
+    private BufferedReader reader;
+    private String file_path;
+
+    FileProcessor(String file_path) throws IOException{
+        this.file_path = file_path;
+        this.fr = new FileReader(this.file_path);
+        this.reader = new BufferedReader(fr);
     }
 
-
-    public HashMap<String, String> pullWords(String file_path){
-        HashMap<String, String> hashmap = new HashMap<>();
-        try {
-            FileReader fr = new FileReader(file_path);
-            BufferedReader reader = new BufferedReader(fr);
-            String line;
-            while((line = reader.readLine()) != null){
-                String[] pair = line.split("  ");
-                hashmap.put(pair[1], pair[0]);
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        } catch (IOException e){
-            System.out.println("error");
+    public ArrayList<String> returnLines() throws IOException {
+        String line;
+        ArrayList<String> allLines = new ArrayList<>();
+        while((line = reader.readLine()) != null){
+            allLines.add(line);
         }
-        return hashmap;
+        reader.close();
+        return allLines;
     }
 }

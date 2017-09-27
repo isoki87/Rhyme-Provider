@@ -1,5 +1,6 @@
 package com.leo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,23 +26,38 @@ public class PhonicDictionary {
 
 
     //This will populate the 2 hash maps and the vowel bank hash set
-    public void initialize() {
-        FileProcessor processor = new FileProcessor();
-        fillWordBank(processor);
-        fillVowelBank(processor);
+    public void initialize() throws IOException {
+        fillWordBank(file_path);
+        fillVowelBank("VowelBank.txt");
         fillLastSoundsBank(wordBank);
     }
 
 
-    //The word bank will be populated by words from the path in the input
-    private void fillWordBank(FileProcessor p) {
-        this.wordBank = p.pullWords(file_path);
+    /*
+    The word bank will be populated by words from file_path in the constructor
+    The FileProcessor will return an arraylist of strings for each line
+    The line will be split, and the full phonic will be stored as the key
+    while the words will be stored as the values
+     */
+    private void fillWordBank(String p) throws IOException {
+        FileProcessor fp = new FileProcessor(p);
+        ArrayList<String> allLines = fp.returnLines();
+        String line;
+        for(int i = 0; i < allLines.size(); i++){
+            line = allLines.get(i);
+            String[] pair = line.split("  ");
+            wordBank.put(pair[1], pair[0]);
+        }
     }
 
 
     //Vowels will be populated with all available english vowel sounds
-    private void fillVowelBank(FileProcessor p) {
-        this.vowelBank = p.pullVowels("VowelBank.txt");
+    private void fillVowelBank(String p) throws IOException{
+        FileProcessor fp = new FileProcessor(p);
+        ArrayList<String> allLines = fp.returnLines();
+        for(int i = 0; i < allLines.size(); i++){
+            vowelBank.add(allLines.get(i));
+        }
     }
 
 
