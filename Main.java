@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         RhymeProvider rp = new RhymeProvider("TestSounds.txt");
         rp.initialize();
-        ArrayList<String> fats = rp.findRhyme("apple");
-        System.out.println(fats.size());
-        System.out.println(fats.get(0));
+        ArrayList<String> test = rp.findRhyme("apple");
+        System.out.println(test.size());
+        System.out.println(test.get(0));
     }
 }
