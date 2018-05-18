@@ -1,5 +1,6 @@
 package com.leo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ public class RhymeProvider {
   private HashMap<String, ArrayList<String>> rhymeBank;  /*k: last sounds, v: list of rhymed words*/
 
   //Constructor, constructs the phonic bank from .txt
-  RhymeProvider(String file_path) throws IOException{
+  public RhymeProvider(String file_path) throws IOException{
     PhonicDictionary pd = new PhonicDictionary(file_path);
     pd.initialize();
     this.phonDict = pd;
@@ -42,11 +43,13 @@ public class RhymeProvider {
   */
   public ArrayList<String> findRhyme(String word){
     word = word.toUpperCase();
+    ArrayList<String> rhymeWords = new ArrayList<String>();
     if(phonDict.doesNotContain(word)){
-      throw new NullPointerException("Sorry, word is not in the word bank");
+      rhymeWords.add("Sorry, word is not in the word bank");
+      return rhymeWords;
     }
     String lastSound = phonDict.idLastSound(word);
-    ArrayList<String> rhymeWords = rhymeBank.get(lastSound);
+    rhymeWords = rhymeBank.get(lastSound);
     rhymeWords.remove(word);
     return rhymeWords;
   }
