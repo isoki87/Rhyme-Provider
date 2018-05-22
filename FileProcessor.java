@@ -9,28 +9,41 @@ import java.util.ArrayList;
  * Created by Lelily on 9/22/2017.
  */
 public class FileProcessor {
-	//private InputStream input;
-	//private InputStreamReader isr;
     private FileReader fr;
     private BufferedReader reader;
     private String file_path;
+    private String vowelPath;
+    private String wordPath;
+    private static ArrayList<String> vowelBank;
+    private static ArrayList<String> wordBank;
 
     FileProcessor(String file_path) throws IOException{
+    	this.wordPath = "../webapps/ROOT/RhymeBank/WordBank.txt";
+    	this.vowelPath = "../webapps/ROOT/RhymeBank/VowelBank.txt";
         this.file_path = file_path;
-        //this.input = this.getClass().getResourceAsStream(this.file_path);
-        //this.isr = new InputStreamReader(input);
-        //this.reader = new BufferedReader(isr);
-        this.fr = new FileReader(this.file_path);
-        this.reader = new BufferedReader(fr);       
     }
 
     public ArrayList<String> returnLines() throws IOException {
         String line;
-        ArrayList<String> allLines = new ArrayList<>();
-        while((line = reader.readLine()) != null){
-            allLines.add(line);
+        if(file_path.equals(wordPath) && !(wordBank.isEmpty())){
+        	return wordBank;
+        } else if (file_path.equals(vowelBank) && !(vowelBank.isEmpty())){
+        	return vowelBank;
+        } else {
+	        this.fr = new FileReader(this.file_path);
+	        this.reader = new BufferedReader(fr);
+	        ArrayList<String> allLines = new ArrayList<>();
+	        while((line = reader.readLine()) != null){
+	            allLines.add(line);
+	        }
+	        reader.close();
+	        if(file_path.equals(wordPath)){
+	        	FileProcessor.wordBank = allLines;
+	        }
+	        if(file_path.equals(vowelPath)){
+	        	FileProcessor.vowelBank = allLines;
+	        }
+	        return allLines;
         }
-        reader.close();
-        return allLines;
     }
 }
