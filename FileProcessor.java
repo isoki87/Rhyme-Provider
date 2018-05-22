@@ -25,9 +25,9 @@ public class FileProcessor {
 
     public ArrayList<String> returnLines() throws IOException {
         String line;
-        if(file_path.equals(wordPath) && !(wordBank.isEmpty())){
+        if(file_path.equals(wordPath) && !(wordBank == null)){
         	return wordBank;
-        } else if (file_path.equals(vowelBank) && !(vowelBank.isEmpty())){
+        } else if (file_path.equals(vowelBank) && !(vowelBank == null)){
         	return vowelBank;
         } else {
 	        this.fr = new FileReader(this.file_path);
