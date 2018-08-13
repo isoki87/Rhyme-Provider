@@ -28,7 +28,7 @@ public class PhonicDictionary {
     //This will populate the 2 hash maps and the vowel bank hash set
     public void initialize() throws IOException {
         fillWordBank(file_path);
-        fillVowelBank("../webapps/ROOT/RhymeBank/VowelBank.txt");
+        fillVowelBank("../resources/RhymeBank/VowelBank.txt");
         fillLastSoundsBank(wordBank);
     }
 
