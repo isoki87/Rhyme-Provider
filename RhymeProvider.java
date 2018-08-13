@@ -45,7 +45,7 @@ public class RhymeProvider {
     word = word.toUpperCase();
     ArrayList<String> rhymeWords = new ArrayList<String>();
     if(phonDict.doesNotContain(word)){
-      rhymeWords.add("Sorry, word is not in the word bank");
+      rhymeWords.add("Sorry, word is not in CMU's word bank!");
       return rhymeWords;
     }
     String lastSound = phonDict.idLastSound(word);
