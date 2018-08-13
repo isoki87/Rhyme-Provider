@@ -18,9 +18,9 @@ public class FileProcessor {
     private static ArrayList<String> wordBank;
 
     FileProcessor(String file_path) throws IOException{
-    	this.wordPath = "../webapps/ROOT/RhymeBank/WordBank.txt";
-    	this.vowelPath = "../webapps/ROOT/RhymeBank/VowelBank.txt";
-        this.file_path = file_path;
+    	this.wordPath = "../resources/RhymeBank/WordBank.txt";
+    	this.vowelPath = "../resources/RhymeBank/VowelBank.txt";
+      this.file_path = file_path;
     }
 
     public ArrayList<String> returnLines() throws IOException {
@@ -37,6 +37,7 @@ public class FileProcessor {
 	            allLines.add(line);
 	        }
 	        reader.close();
+	        fr.close();
 	        if(file_path.equals(wordPath)){
 	        	FileProcessor.wordBank = allLines;
 	        }
